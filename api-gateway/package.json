@@ -26,6 +26,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/microservices": "^8.2.5",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/swagger": "^7.1.11",
     "kafkajs": "^1.15.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
