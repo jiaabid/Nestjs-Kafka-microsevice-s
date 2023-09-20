@@ -1,5 +1,6 @@
 export class CreateOrderDto {
-    constructor(
-    ) {}
+   products: number [];
+   bill:string;
+   createdBy:number
   }
   

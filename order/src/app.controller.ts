@@ -10,11 +10,11 @@ export class AppController {
   @MessagePattern(OrderTopics.ADD_ORDER)
   createOrder(data: any) {
     console.log('in add order');
-    return this.appService.createOrder(data.value);
+    return this.appService.createOrder(data);
   }
   @MessagePattern(OrderTopics.GET_ORDER)
   getOrder(data) {
-    return this.appService.getOrder(data.value.id);
+    return this.appService.getOrder(data.id);
   }
   @MessagePattern(OrderTopics.GET_ORDERS)
   getOrders() {
@@ -23,6 +23,6 @@ export class AppController {
   @MessagePattern(OrderTopics.DELETE_ORDER)
   deletedOrder(data) {
     console.log(data);
-    return this.appService.deletedOrder(data.value.id);
+    return this.appService.deletedOrder(data.id);
   }
 }
