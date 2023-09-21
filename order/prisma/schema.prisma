@@ -12,7 +12,15 @@ datasource db {
 
 model Order {
   id Int @id @default(autoincrement())
-  products Int[]
+  products OrderProduct[]
   createdBy Int
   bill String
+
+}
+
+model OrderProduct {
+  id Int @id @default(autoincrement())
+  orderId Int
+  productId Int
+  order Order @relation(fields: [orderId], references: [id])
 }

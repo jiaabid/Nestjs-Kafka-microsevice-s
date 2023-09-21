@@ -17,8 +17,8 @@ export class AppController {
     return this.appService.getProduct(data.id);
   }
   @MessagePattern(ProductTopics.GET_PRODUCTS)
-  getProducts() {
-    return this.appService.getProducts();
+  getProducts(data) {
+    return this.appService.getProducts(data);
   }
   @MessagePattern(ProductTopics.UPDATE_PRODUCT)
   updateProduct(data) {

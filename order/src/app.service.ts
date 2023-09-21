@@ -7,47 +7,70 @@ export class AppService {
   constructor(private readonly prismaService: PrismaService) {
 
   }
-  
- async createOrder(payload:CreateOrderDto) {
+
+  async createOrder(payload: CreateOrderDto) {
     try {
       console.log(payload)
-      let result =await this.prismaService.order.create({
-        data:payload
+      let products = payload.products.map(product=>{
+        return {
+          productId:product
+        }
+      }) 
+      delete payload.products
+      let result = await this.prismaService.order.create({
+        data: {
+          ...payload,
+          products:{
+            create:products
+          }
+        },
+        
       });
-      return {result,error:false}
+      return { result, error: false }
     } catch (err) {
       console.log(err);
-      console.log(err.message);
-      return {message:err.message,error:true};
+      return { message: err.message, error: true };
     }
   }
 
-  getOrder(id:number) {
+  async getOrder(id: number) {
     try {
-      return this.prismaService.order.findFirst({
-        where:{id}
+      let result = await this.prismaService.order.findFirst({
+        where: { id }
       })
+      return {result,error:false}
     } catch (err) {
       console.log(err)
+      return { message: err.message, error: true };
     }
   }
 
-  getOrders() {
+  async getOrders(queryParams) {
     try {
-      return this.prismaService.order.findMany()
+      let query = {}
+      if (queryParams.filter) {
+        query = {
+          where: queryParams.filter
+        }
+      }
+      let result = await this.prismaService.order.findMany(query)
+      return { result, error: false }
     } catch (err) {
       console.log(err)
+      return { message: err.message, error: true };
     }
   }
 
-  deletedOrder(id:number) {
-    console.log(id)
+  async deletedOrder(id: number) {
     try {
-      return this.prismaService.order.delete({
-      where:{id}
+      let result =await this.prismaService.order.delete({
+        where: { id }
       })
+      return {result,error:false}
     } catch (err) {
       console.log(err)
+      return { message: err.message, error: true };
+
     }
   }
 

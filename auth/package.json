@@ -29,7 +29,7 @@
     "@nestjs/microservices": "^8.2.5",
     "@nestjs/platform-express": "^8.0.0",
     "@prisma/client": "^5.3.1",
-    "kafkajs": "^1.15.0",
+    "kafkajs": "^2.2.4",
     "prisma": "^5.3.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

@@ -10,11 +10,11 @@ export class AppController {
   @MessagePattern(UserTopics.ADD_USER)
   addUser(data: any) {
     console.log('in add user')
-    return this.appService.createUser(data.value);
+    return this.appService.createUser(data);
   }
   @MessagePattern(UserTopics.GET_USER)
   getUser(data) {
-    return this.appService.getUser(data.value.id);
+    return this.appService.getUser(data.id);
   }
   @MessagePattern(UserTopics.GET_USERS)
   getUsers() {
@@ -22,11 +22,11 @@ export class AppController {
   }
   @MessagePattern(UserTopics.UPDATE_USER)
   updateUser(data) {
-    return this.appService.updateUser(data.value.id,data.value.updateUserDto);
+    return this.appService.updateUser(data.id,data.updateUserDto);
   }
   @MessagePattern(UserTopics.DELETE_USER)
   deleteUser(data) {
     console.log(data)
-    return this.appService.deletedUser(data.value.id);
+    return this.appService.deletedUser(data.id);
   }
 }

@@ -17,8 +17,8 @@ export class AppController {
     return this.appService.getOrder(data.id);
   }
   @MessagePattern(OrderTopics.GET_ORDERS)
-  getOrders() {
-    return this.appService.getOrders();
+  getOrders(data) {
+    return this.appService.getOrders(data);
   }
   @MessagePattern(OrderTopics.DELETE_ORDER)
   deletedOrder(data) {

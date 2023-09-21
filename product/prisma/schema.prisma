@@ -15,4 +15,5 @@ model Product {
   name String @unique
   quantity String
   price String
+  createdBy Int?
 }

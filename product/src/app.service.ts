@@ -8,64 +8,80 @@ export class AppService {
   constructor(private readonly prismaService: PrismaService) {
 
   }
-  
- async createProduct(payload:CreateProductDto) {
+
+  async createProduct(payload: CreateProductDto) {
     try {
       console.log(payload)
-      let result =await this.prismaService.product.create({
-        data:payload
+      let result = await this.prismaService.product.create({
+        data: payload
       });
-      return {result,error:false}
+      return { result, error: false }
     } catch (err) {
       console.log(err);
       console.log(err.message);
-      return {message:err.message,error:true};
+      return { message: err.message, error: true };
     }
   }
 
-  getProduct(id:number) {
+ async getProduct(id: number) {
     try {
-      return this.prismaService.product.findFirst({
-        where:{id}
+      let result = await this.prismaService.product.findFirst({
+        where: { id }
       })
+      return {result,error:false}
     } catch (err) {
       console.log(err)
+      return { message: err.message, error: true };
     }
   }
 
-  getProducts() {
+  async getProducts(queryParams) {
     try {
-      return this.prismaService.product.findMany()
+      let query = {}
+      if (queryParams.filter) {
+        query = {
+          where: queryParams.filter
+        }
+      }
+      let result= await this.prismaService.product.findMany(query)
+      return {result,error:false}
     } catch (err) {
       console.log(err)
+      return { message: err.message, error: true };
     }
   }
 
-  deletedProduct(id:number) {
+  async deletedProduct(id: number) {
     console.log(id)
     try {
-      return this.prismaService.product.delete({
-      where:{id}
+      let result = this.prismaService.product.delete({
+        where: { id }
       })
+      return {result,error:false}
     } catch (err) {
       console.log(err)
+      return { message: err.message, error: true };
     }
   }
 
-  async updateProduct(id:number,payload:UpdateProductDto) {
+  async updateProduct(id: number, payload: UpdateProductDto) {
     try {
-  
+
       const exist = await this.prismaService.product.findFirst({
-        where:{id}
+        where: { id }
       })
-      exist["name"] = payload.name
-    return  this.prismaService.product.update({
-        where:{id},
-        data:exist
+      Object.keys(payload).forEach(key=>{
+        exist[key] = payload[key]
       })
+      let result =await this.prismaService.product.update({
+        where: { id },
+        data: exist
+      })
+      return {result,error:false}
 
     } catch (err) {
       console.log(err)
+      return { message: err.message, error: true };
     }
   }
 }
