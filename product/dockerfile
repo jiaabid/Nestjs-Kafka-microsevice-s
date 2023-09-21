@@ -8,6 +8,7 @@ RUN npm install
 
 COPY . .
 
+RUN npm run prisma:client
 RUN npm run build
 
 FROM node:alpine As production

@@ -26,8 +26,8 @@ services:
       ZOOKEEPER_AUTOPURGE_PURGE_INTERVAL: "0"
   api_gateway:
     build:
-      context: .
-      dockerfile: ./api-gateway/Dockerfile
+      context: api-gateway
+      dockerfile: Dockerfile
       target: development
     command: npm run start:dev
     depends_on:
@@ -42,8 +42,8 @@ services:
       - '3000:3000'
   user:
     build:
-      context: .
-      dockerfile: ./auth/Dockerfile
+      context: auth
+      dockerfile: Dockerfile
       target: development
     command: npm run start:dev
     depends_on:
@@ -56,8 +56,8 @@ services:
       - /usr/src/app/node_modules
   product:
     build:
-      context: .
-      dockerfile: ./product/Dockerfile
+      context: product
+      dockerfile: Dockerfile
       target: development
     command: npm run start:dev
     depends_on:
@@ -70,8 +70,8 @@ services:
       - /usr/src/app/node_modules
   order:
     build:
-      context: .
-      dockerfile: ./order/Dockerfile
+      context: order
+      dockerfile: Dockerfile
       target: development
     command: npm run start:dev
     depends_on:
@@ -99,7 +99,7 @@ services:
       POSTGRES_PASSWORD: 12345
       POSTGRES_DB: product
     ports:
-      - "5433:5432" # Expose the database port
+      - "5432:5432" # Expose the database port
   order_db:
     image: postgres:latest
     container_name: order_db
