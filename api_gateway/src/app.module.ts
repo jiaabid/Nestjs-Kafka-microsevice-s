@@ -15,7 +15,7 @@ import { OrderModule } from './order/order.module';
         options: {
           client: {
             clientId: 'auth',
-            brokers: ['https://479e-94-207-118-160.ngrok-free.app'],
+            brokers: ['kafka:9092'],
           },
           consumer: {
             groupId: 'auth-consumer',

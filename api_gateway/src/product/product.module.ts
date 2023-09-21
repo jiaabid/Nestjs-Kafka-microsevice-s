@@ -11,7 +11,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       options: {
         client: {
           clientId: 'product',
-          brokers: ['https://479e-94-207-118-160.ngrok-free.app'],
+          brokers: ['kafka:9092'],
         },
         consumer: {
           groupId: 'product-consumer',
